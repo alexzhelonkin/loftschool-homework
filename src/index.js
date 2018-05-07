@@ -6,123 +6,114 @@
  Напишите аналог встроенного метода forEach для работы с массивами
  Посмотрите как работает forEach и повторите это поведение для массива, который будет передан в параметре array
  */
-var arr = ['h', 'e', 'l', 'l', 'o'];
-
 function forEach(array, fn) {
     for (var i = 0; i < array.length; i++) {
         fn(array[i], i, array);
     }
+}
+/*
+ Задание 2:
 
-    /*
-     Задание 2:
+ Напишите аналог встроенного метода map для работы с массивами
+ Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
+*/
+function map(array, fn) {
+    const arrCopy = [];
 
-     Напишите аналог встроенного метода map для работы с массивами
-     Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
-     */
+    for (var i = 0; i < array.length; i++) {
+        arrCopy[i] = fn(array[i], i, array);
+    }
 
-    var arrMap = [10, 11, 12, 13, 14];
+    return arrCopy
 
-    function map(array, fn) {
-        var arrCopy = [];
-        for (var i = 0; i < array.length; i++) {
-            var funRes = fn(array[i], i, array);
-            arrCopy.push(funRes);
+}
+/*
+ Задание 3:
+
+ Напишите аналог встроенного метода reduce для работы с массивами
+ Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
+ */
+function reduce(array, fn, initial) {
+
+    let acc = initial || array[0];
+    const start = initial ? 0 : 1;
+
+    for (var i = start; i < array.length; i++) {
+        acc = fn(acc, array[i], i, array);
+    }
+
+    return acc;
+
+}
+/*
+ Задание 4:
+
+ Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистр и вернуть в виде массива
+
+ Пример:
+   upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
+ */
+
+function upperProps(obj) {
+    return Object.keys(obj).map(e => e.toUpperCase())
+}
+
+/*
+ Задание 5 *:
+
+ Напишите аналог встроенного метода slice для работы с массивами
+ Посмотрите как работает slice и повторите это поведение для массива, который будет передан в параметре array
+ */
+function slice(array, from = 0, to = array.length) {
+    const arrSlice2 = [];
+
+    if (to != 0) {
+        to = to ? to : array.length;
+    }
+
+    if (to < 0) {
+        to = array.length + to;
+    }
+
+    if (to > array.length) {
+        to = array.length;
+    }
+
+    if (from < 0) {
+        from = array.length + from;
+        if (from < 0) {
+            from = 0;
         }
-        return arrCopy
     }
 
-    function multiply(i) {
-        return i * 2;
+    for (var i = from; i < to; i++) {
+        arrSlice2.push(array[i]);
     }
 
-    var multArr = map(arrMap, multiply);
-    console.log(multArr);
+    return arrSlice2;
+}
 
-    /*
-     Задание 3:
+/*
+ Задание 6 *:
 
-     Напишите аналог встроенного метода reduce для работы с массивами
-     Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
-     */
-    function reduce(arr, fn, initialValue) {
-        var returnedValue = initialValue || 0;
-        for (var i = 0; i < arr.length; i++) {
-            returnedValue = returnedValue + fn(initialValue, arr[i]);
+ Функция принимает объект и должна вернуть Proxy для этого объекта
+ Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
+ */
+function createProxy(obj) {
+    return new Proxy(obj, {
+        set(target, prop, value) {
+            target[prop] = value * value;
+
+            return true;
         }
-        return returnedValue;
-    }
-    var reduceTestResult = reduce([1, 2, 3], function(acc, n) {
-        return acc + n;
-    }, 0);
-    console.log(reduceTestResult);
+    });
+}
 
-    /*
-     Задание 4:
-
-     Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистр и вернуть в виде массива
-
-     Пример:
-       upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
-     */
-
-    var someWords = {
-        name: 'andrew',
-        lastName: 'lincoln'
-    }
-
-    function upperProps(obj) {
-        var arrayWithProps = [];
-        for (key in obj) {
-            arrayWithProps.push(key.toUpperCase());
-        }
-        return arrayWithProps
-    }
-
-    /*
-     Задание 5 *:
-
-     Напишите аналог встроенного метода slice для работы с массивами
-     Посмотрите как работает slice и повторите это поведение для массива, который будет передан в параметре array
-     */
-
-    /* var arrSlice = [10, 11, 12, 13, 14];
-    ​
-    function slice(array, from, to) {
-        var arrSlice2 = [];
-        var endIndex = to || array.length;
-        for (var i = from; i < endIndex; i++) {
-            arrSlice2.push(arrSlice[i]);
-        }
-        return arrSlice2;
-    }
-    */
-
-
-    var arrSlice = [10, 11, 12, 13, 14];
-
-    function slice(array, from, to) {
-        var arrSlice2 = [];
-        for (var i = from; i < to; i++) {
-            arrSlice2.push(arrSlice[i]);
-        }
-        return arrSlice2;
-    }
-
-    /*
-     Задание 6 *:
-
-     Функция принимает объект и должна вернуть Proxy для этого объекта
-     Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
-     */
-    function createProxy(obj, handler) {
-        return new Proxy(obj, handler);
-    }
-
-    export {
-        forEach,
-        map,
-        reduce,
-        upperProps,
-        slice,
-        createProxy
-    };
+export {
+    forEach,
+    map,
+    reduce,
+    upperProps,
+    slice,
+    createProxy
+};
