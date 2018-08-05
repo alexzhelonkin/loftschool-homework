@@ -1,16 +1,16 @@
-/* ДЗ 1 - Функции */
+/* Homework 1 - Functions */
 
 /*
- Задание 1:
+ Task 1:
 
- 1.1: Добавьте к функции параметр с любым именем
- 1.2: Функция должна возвращать аргумент, переданный ей в качестве параметра
+ 1.1: Add a parameter with any name to the function
+ 1.2: The function must return an argument passed to it as a parameter
 
  Пример:
-   returnFirstArgument(10) вернет 10
-   returnFirstArgument('привет') вернет `привет`
+   returnFirstArgument(10) returns 10
+   returnFirstArgument('hi') returns `hi`
 
- Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
+The function must return unchanged what is input to it
  */
 
 function returnFirstArgument(arg1) {
@@ -18,47 +18,47 @@ function returnFirstArgument(arg1) {
 }
 
 /*
- Задание 2:
+ Task 2:
 
- 2.1: Функция должна возвращать сумму переданных аргументов
+ 2.1: The function must return the sum of the arguments passed
 
- Пример:
-   sumWithDefaults(10, 20) вернет 30
-   sumWithDefaults(2, 4) вернет 6
+ Example:
+   sumWithDefaults(10, 20) returns 30
+   sumWithDefaults(2, 4) returns 6
 
- 2.1 *: Значение по умолчанию для второго аргумента должно быть равно 100
+ 2.1 *: The default value for the second argument must be 100
 
- Пример:
-   sumWithDefaults(10) вернет 110
+ Example:
+   sumWithDefaults(10) returns 110
  */
 function sumWithDefaults(a, b = 100) {
     return a + b
 }
 sumWithDefaults(10);
 /*
- Задание 3:
+ Task 3:
 
- Функция должна принимать другую функцию и возвращать результат вызова этой функции
+ The function must perform another function and return the result
 
- Пример:
-   returnFnResult(() => 'привет') вернет 'привет'
+ Example:
+   returnFnResult(() => 'hi') returns 'hi'
  */
 function returnFnResult(fn) {
     return fn();
 }
 
 /*
- Задание 4:
+ Task 4:
 
- Функция должна принимать число и возвращать новую функцию (F)
- При вызове функции F, переданное ранее число должно быть увеличено на единицу и возвращено из F
+ The function must take a number and return a new function (F)
+ When the function F is called, the previously transmitted number must be incremented by one and returned from F
 
- Пример:
+ Example:
    var f = returnCounter(10);
 
-   console.log(f()); // выведет 11
-   console.log(f()); // выведет 12
-   console.log(f()); // выведет 13
+   console.log(f()); // output 11
+   console.log(f()); // output 12
+   console.log(f()); // output 13
  */
 
 function returnCounter(n = 0) {
@@ -70,31 +70,31 @@ function returnCounter(n = 0) {
 returnCounter();
 
 /*
- Задание 5 *:
+ Task 5 *:
 
- Функция должна возвращать все переданные ей аргументы в виде массива
- Количество переданных аргументов заранее неизвестно
+ The function must return all arguments passed to it as an array
+ The number of arguments passed is not known in advance
 
- Пример:
-   returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
+ Example:
+   returnArgumentsArray(1, 2, 3) returns [1, 2, 3]
  */
 function returnArgumentsArray() {
     return [...arguments]
 }
 /*
- Задание 6 *:
+ Task 6 *:
 
- Функция должна принимать другую функцию (F) и некоторое количество дополнительных аргументов
- Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
+ The function must take another function (F) and a certain number of additional arguments
+ The function must bind the passed arguments to the functions F and return the resulting function
 
- Пример:
+ Example:
    function sum(a, b) {
      return a + b;
    }
 
    var newSum = bindFunction(sum, 2, 4);
 
-   console.log(newSum()) выведет 6
+   console.log(newSum()) output 6
  */
 
 function bindFunction(fn, ...args) {
